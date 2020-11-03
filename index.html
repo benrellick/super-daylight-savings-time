@@ -12,18 +12,16 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
 		<!-- iOS -->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="mobile-web-app-capable" content="yes">
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+		<!-- <meta name="mobile-web-app-capable" content="yes"> -->
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="apple-touch-fullscreen" content="yes">
 		
-	    <!-- webfonts -->
-		<link href="https://fonts.googleapis.com/css?family=Gelasio:400,700&display=swap" rel="stylesheet">
-
 		<style>
 			html {
-				font-family: Gelasio, Avenir, sans-serif;
-				color: #222;
+				font-family: monospace;
+				color: #579a9d;
+				background: #1d313b;
 			}
 			.wrap {
 				margin: 100px 10% 10%;
@@ -32,7 +30,15 @@
 				color: #769c76;
 			}
 			p {
-				color: #777;
+				color: #3b5f61;
+			}
+			#time-sdst {
+				color: #dffeff;
+				text-shadow: 0 0 6px #58999d;
+				font-weight: normal;
+			}
+			h2 {
+				font-weight: normal;
 			}
 		</style>
 
@@ -41,20 +47,6 @@
 		<script>
 
 			function getTime() {
-
-				// Get sunset time (e.g. 5:15pm)
-				// Get differenct (time from now til sunset)
-					// If current time is less, subtract current time from sunset time
-					// If current time is more, subtract sunset time from current time
-				// Add 
-
-				/* OR.... */
-
-				// Get sunset time (e.g. 5:15pm)
-				// If less than 9pm, subtract sunset time from 9pm
-					// Subtract this much from the current time
-				// If later, subtract 9pm from sunset time
-					// Add this much from the current time
 
 				let now = Date.now();
 				let nowString = new Date(now).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, month: 'short', day: 'numeric'});
