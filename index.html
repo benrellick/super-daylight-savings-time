@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Super Daylight Savings Time</title>
+		<!-- Mobile Specific Metas -->
+
+	    <!-- MOBILE: viewport stuff -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+		<!-- iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		
+	    <!-- webfonts -->
+		<link href="https://fonts.googleapis.com/css?family=Gelasio:400,700&display=swap" rel="stylesheet">
+
+		<style>
+			html {
+				font-family: Gelasio, Avenir, sans-serif;
+				color: #222;
+			}
+			.wrap {
+				margin: 100px 10% 10%;
+			}
+			#time-sdst {
+				color: #769c76;
+			}
+			p {
+				color: #777;
+			}
+		</style>
+
+		<script src="suncalc.js"></script>
+
+		<script>
+
+			function getTime() {
+
+				// Get sunset time (e.g. 5:15pm)
+				// Get differenct (time from now til sunset)
+					// If current time is less, subtract current time from sunset time
+					// If current time is more, subtract sunset time from current time
+				// Add 
+
+				/* OR.... */
+
+				// Get sunset time (e.g. 5:15pm)
+				// If less than 9pm, subtract sunset time from 9pm
+					// Subtract this much from the current time
+				// If later, subtract 9pm from sunset time
+					// Add this much from the current time
+
+				let now = Date.now();
+				let nowString = new Date(now).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, month: 'short', day: 'numeric'});
+				document.getElementById("time-et").innerHTML = nowString;
+
+				let sunTimes = SunCalc.getTimes(new Date(), 38.4, -78.8);
+				console.log("sunTimes",sunTimes);
+				let sunsetString = sunTimes.sunset.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+				document.getElementById("sunset-et").innerHTML = sunsetString;
+
+				let nine = new Date();
+				nine.setHours(21, 00, 00);
+				console.log("nine",nine);
+				let sdst = new Date (now + (nine - sunTimes.sunset));
+				console.log("sdst", sdst);
+				let theMonth =  new Intl.DateTimeFormat('en-US', { month: 'short'}).format(sdst);
+				console.log("the month", theMonth);
+				sdstString = sdst.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, month: 'short', day: 'numeric' });
+				document.getElementById("time-sdst").innerHTML = sdstString;
+
+			};
+
+			window.addEventListener('DOMContentLoaded', function(){
+		        getTime();
+		     });
+
+		</script>
+
+	</head>
+
+	<body>
+		<div class="wrap">
+
+			<p>Current time <br />(Super Daylight Savings Time)</p>
+			<h1 id="time-sdst">?</h1>
+
+			<p>Sunset (SDST):</p>
+			<h2 id="sunset-sdst">9:00 PM</h1>
+
+			<br />
+			<hr />
+
+
+			<p>Current "real" time (ET)</p>
+			<h2 id="time-et"></h1>
+
+			<p>Sunset (ET)</p>
+			<h2 id="sunset-et"></h1>
+
+		</div><!-- end wrap -->
+
+	</body>
+
+</html>
